@@ -1,6 +1,6 @@
 [user]
-	name = Federico Galassi
-	email = federico.galassi@gmail.com
+	name = Marco Faustinelli
+	email = marco.faustinelli@neomobile.com
 [core]
 	editor = vim
 [color]
@@ -25,8 +25,6 @@
 	see = log --graph --oneline --decorate --all --abbrev-commit
 	sh = stash
 	st = status
-[heroku]
-	account = federico.galassi.gmail.com
 [merge]
 	tool = vimdiff
 [diff]
@@ -34,6 +32,6 @@
 [push]
 	default = upstream
 [github]
-	user = fgalassi
+	user = marco.faustinelli
 [rerere]
 	enabled = true
