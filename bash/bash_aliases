@@ -1,131 +1,43 @@
+###################
+# aliases for Marco
+###################
+alias projs="cd ~/projects/Onebip"
+alias ou="cd ~/projects/Onebip/onebip-ultimate"
+alias legacy="cd ~/projects/Onebip/onebip"
+
 # vim: ft=sh:sw=2:ts=2
-function bash_aliases_find() {
-  local terms="$@"
-  grep "^\s*alias.*${terms// /.*}" ~/.bash_aliases | sort | cut -d" " -f2
-}
-
-function bash_aliases_edit() {
-  vim ~/.bash_aliases
-}
-
-function bash_aliases_source() {
-  source ~/.bash_aliases
-}
-
-function bash_aliases_edit_source() {
-  bash_aliases_edit
-  bash_aliases_source
-}
-
-
-function git_add() {
-  git add "$@"
-}
-
-function git_files_modified_edit() {
-  vim $(git diff --name-only)
-}
-
-function git_branch() {
-  git branch "$@"
-}
-
-function git_branch_all {
-  git branch --all "$@"
-}
-
-function git_commit {
-  git commit "$@"
-}
-
-function git_commit_amend {
-  git commit --amend "$@"
-}
-
-function git_commit_message {
-  git commit --message "$@"
-}
-
-function git_checkout {
-  git checkout "$@"
-}
-
-function git_checkout_branch {
-  git checkout -b "$@"
-}
-
-function git_checkout_master {
-  git checkout master
-}
-
-function git_diff {
-  git diff "$@"
-}
-
-function git_diff_staged {
-  git diff --staged "$@"
-}
-
-function git_log {
-  git log "$@"
-}
-
-function git_log_new_here {
-  git log master..HEAD
-}
-
-function git_log_patch {
-  git log --patch "$@"
-}
-
-function git_log_stat {
-  git log --stat "$@"
-}
-
-function git_remote {
-  git remote "$@"
-}
-
-function git_remote_verbose {
-  git remote --verbose "$@"
-}
-
-function git_see {
-  git log --graph --oneline --decorate --all --abbrev-commit "$@"
-}
-
-function git_stash {
-  git stash "$@"
-}
-
-function git_status {
-  git status "$@"
-}
-
-function git_push_u_origin_head {
-  git push -u origin HEAD
-}
-
-function git_pullall {
-  git pull "$@" && git submodule update --init --recursive;
-}
-
-function git_cherry_pick {
-  git cherry-pick "$@"
-}
-
-function git_submodule_update {
-  git submodule update
-}
-
-function tmux_config_edit {
-  vim ~/.tmux.conf
-}
-
-function vim_config_edit {
-  vim ~/.vimrc
-}
-
+function bash_aliases_find() { local terms="$@"; grep "^\s*alias.*${terms// /.*}" ~/.bash_aliases | sort | cut -d" " -f2; } 
+function bash_aliases_edit() { vim ~/.bash_aliases; }
+function bash_aliases_source() { source ~/.bash_aliases; }
+function bash_aliases_edit_source() { bash_aliases_edit; bash_aliases_source; } 
+function git_add() { git add "$@"; } 
+function git_files_modified_edit() { vim $(git diff --name-only); } 
+function git_branch() { git branch "$@"; } 
+function git_branch_all { git branch --all "$@"; } 
+function git_commit { git commit "$@"; } 
+function git_commit_amend { git commit --amend "$@"; } 
+function git_commit_message { git commit --message "$@"; } 
+function git_checkout { git checkout "$@"; } 
+function git_checkout_branch { git checkout -b "$@"; } 
+function git_checkout_master { git checkout master; } 
+function git_diff { git diff "$@"; } 
+function git_diff_staged { git diff --staged "$@"; } 
+function git_log { git log "$@"; } 
+function git_log_new_here { git log master..HEAD; } 
+function git_log_patch { git log --patch "$@"; } 
+function git_log_stat { git log --stat "$@"; } 
+function git_remote { git remote "$@"; } 
+function git_remote_verbose { git remote --verbose "$@"; } 
+function git_see { git log --graph --oneline --decorate --all --abbrev-commit "$@"; } 
+function git_stash { git stash "$@"; } 
+function git_status { git status "$@"; } 
+function git_push_u_origin_head { git push -u origin HEAD; } 
+function git_pullall { git pull "$@" && git submodule update --init --recursive; } 
+function git_cherry_pick { git cherry-pick "$@"; } 
+function git_submodule_update { git submodule update; } 
+function tmux_config_edit { vim ~/.tmux.conf; } 
+function vim_config_edit { vim ~/.vimrc; } 
+##############################
 alias a=bash_aliases_find
 alias bae=bash_aliases_edit
 alias baes=bash_aliases_edit_source
