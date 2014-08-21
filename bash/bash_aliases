@@ -6,9 +6,13 @@ alias ou="cd ~/projects/Onebip/onebip-ultimate"
 alias legacy="cd ~/projects/Onebip/onebip"
 alias phplog="cd /var/log"
 alias phplogtail="tail -f /var/log/php.log"
+alias viphplog="vim /var/log/php.log"
+alias vimphplog="vim /var/log/php.log"
 alias applogs="cd /var/log/onebip/onebip"
 alias exclogtail="tail -f /var/log/onebip/onebip/*ultimate-caught-exceptions.txt"
 alias postlogtail="tail -f /var/log/onebip/onebip/*-clients-ultimate.txt"
+alias figrep="find . | grep "
+alias higrep="history | grep "
 
 # vim: ft=sh:sw=2:ts=2
 function bash_aliases_find() { local terms="$@"; grep "^\s*alias.*${terms// /.*}" ~/.bash_aliases | sort | cut -d" " -f2; } 
