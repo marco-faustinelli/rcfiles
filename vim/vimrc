@@ -180,3 +180,8 @@ colorscheme molokai
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.work$\|.keep$'
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+" MARCO MAPPINGS
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
+
