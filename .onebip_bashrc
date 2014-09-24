@@ -1,0 +1,30 @@
+# to be linked from $HOME
+alias ll='ls -latrh --color=auto'
+alias grep='grep --color=auto'
+alias onebip_dev='ssh root@192.168.56.10'
+alias onebip_es='ssh root@192.168.56.20'
+
+export TERM=xterm-256color
+
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+
+green=$(tput setaf 2)
+blue=$(tput setaf 4)
+bold=$(tput bold)
+red=$(tput setaf 1)
+reset=$(tput sgr0)
+
+export ENVIRONMENT="dev"
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
+export EDITOR="vim"
+
+export MYPS='$(echo -n "${PWD/#$HOME/~}" | awk -F "/" '"'"'{if (length($0) > 14) { if (NF>4) print $1 "/" $2 "/.../" $(NF-1) "/" $NF; else if (NF>3) print $1 "/" $2 "/.../" $NF; else print $1 "/.../" $NF; } else print $0;}'"'"')'
+
+PS1='\u@\[$green\]\h\[$reset\]-\[$red\]$ENVIRONMENT\[$reset\]:$(eval "echo ${MYPS}")$ \[$blue\]$(__git_ps1)\[$reset\] \$ '
+
+PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+
+ __git_complete gco _git_checkout
