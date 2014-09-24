@@ -1,10 +1,13 @@
 ###################
 # aliases for Marco
 ###################
+alias e="exit"
 alias projs="cd ~/projects/Onebip"
 alias ou="cd ~/projects/Onebip/onebip-ultimate"
 alias book="cd ~/projects/Onebip/bookclub"
+alias aliens="cd ~/projects/Onebip/bookclub/alienInvasion/faust-js"
 alias legacy="cd ~/projects/Onebip/onebip"
+alias le="cd ~/projects/Onebip/onebip"
 alias docs="cd ~/projects/Onebip/documentations"
 alias phplog="cd /var/log"
 alias tailphplog="tail -f /var/log/php.log"
@@ -27,10 +30,11 @@ alias pds="phing dds"
 alias pfb="phing force-bk"
 alias pfbk="phing force-bk"
 alias pui="phing ui-spec-unit"
-alias mu="node_modules/mocha/bin/mocha ui-spec/unit"
-alias mau="node_modules/mocha/bin/mocha spec"
-alias ma="node_modules/mocha/bin/mocha ui-spec/acceptance -t 10000"
-alias ms="node_modules/mocha/bin/mocha ui-spec/stack -t 10000"
+alias pcd="phing clean-dev"
+alias mu="ui-spec/node_modules/mocha/bin/mocha ui-spec/unit"
+alias mau="ui-spec/node_modules/mocha/bin/mocha spec"
+alias ma="ui-spec/node_modules/mocha/bin/mocha ui-spec/acceptance -t 30000"
+alias ms="ui-spec/node_modules/mocha/bin/mocha ui-spec/stack -t 5000"
 alias sel='java -jar vendor/selenium-server-standalone-2.39.0/selenium-server-standalone-2.39.0.jar&'
 
 # vim: ft=sh:sw=2:ts=2
@@ -81,6 +85,7 @@ alias gcob=git_checkout_branch
 alias gcom=git_checkout_master
 alias gcp=git_cherry_pick
 alias gd=git_diff
+alias gdoh="git diff origin HEAD"
 alias gdnh=git_diff_new_here
 alias gds=git_diff_staged
 alias gl=git_log
