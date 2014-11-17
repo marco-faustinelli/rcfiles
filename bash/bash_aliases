@@ -4,6 +4,9 @@
 alias e="exit"
 alias projs="cd ~/projects/Onebip"
 alias ou="cd ~/projects/Onebip/onebip-ultimate"
+alias front="cd ~/projects/Onebip/onebip-panel/front"
+alias rest="cd ~/projects/Onebip/onebip-panel/rest"
+alias restlogs="cd /var/www/data/rest/logs"
 alias book="cd ~/projects/Onebip/bookclub"
 alias aliens="cd ~/projects/Onebip/bookclub/alienInvasion/faust-js"
 alias legacy="cd ~/projects/Onebip/onebip"
@@ -32,10 +35,13 @@ alias pfbk="phing force-bk"
 alias pui="phing ui-spec-unit"
 alias pcd="phing clean-dev"
 alias mu="ui-spec/node_modules/mocha/bin/mocha ui-spec/unit"
+alias me="ui-spec/node_modules/mocha/bin/mocha ui-spec/state_machine_exerciser"
 alias mau="ui-spec/node_modules/mocha/bin/mocha spec"
 alias ma="ui-spec/node_modules/mocha/bin/mocha ui-spec/acceptance -t 30000"
 alias ms="ui-spec/node_modules/mocha/bin/mocha ui-spec/stack -t 5000"
 alias sel='java -jar vendor/selenium-server-standalone-2.39.0/selenium-server-standalone-2.39.0.jar&'
+alias valiases="vim ~/.bash_aliases"
+alias gralias="alias | grep $@"
 
 # vim: ft=sh:sw=2:ts=2
 function bash_aliases_find() { local terms="$@"; grep "^\s*alias.*${terms// /.*}" ~/.bash_aliases | sort | cut -d" " -f2; } 
