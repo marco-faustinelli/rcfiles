@@ -40,11 +40,13 @@ alias pfbk="phing force-bk"
 alias pui="phing ui-spec-unit"
 alias pcd="phing clean-dev"
 alias mu="ui-spec/node_modules/mocha/bin/mocha ui-spec/unit"
+alias mud="ui-spec/node_modules/mocha/bin/mocha --debug-brk ui-spec/unit"
 alias me="ui-spec/node_modules/mocha/bin/mocha ui-spec/state_machine_exerciser"
 alias mau="ui-spec/node_modules/mocha/bin/mocha spec"
 alias ma="ui-spec/node_modules/mocha/bin/mocha ui-spec/acceptance -t 30000"
 alias ms="ui-spec/node_modules/mocha/bin/mocha ui-spec/stack -t 5000"
 alias sel='java -jar vendor/selenium-server-standalone-2.39.0/selenium-server-standalone-2.39.0.jar&'
+alias uip='php /root/projects/Onebip/onebip/connectivity/scripts/userIsPoor.php '
 alias valiases="vim ~/.bash_aliases"
 alias gralias="alias | grep $@"
 
