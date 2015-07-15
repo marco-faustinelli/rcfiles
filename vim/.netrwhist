@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/root/projects/Onebip/panel/app/lib'
+let g:netrw_dirhist_2='/root/projects/Onebip/panel/app'
+let g:netrw_dirhist_3='/root/projects/Onebip/panel'
+let g:netrw_dirhist_4='/root/projects/Onebip/panel/app/lib/dashboard/js'
+let g:netrw_dirhist_5='/root/projects/Onebip/panel/app/lib/dashboard'
+let g:netrw_dirhist_6='/root/projects/Onebip/panel/app/lib/dashboard/views'

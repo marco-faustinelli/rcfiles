@@ -126,7 +126,7 @@ endif
 " vundle
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 Bundle 'gmarik/vundle'
 Bundle 'matchit.zip'
@@ -169,6 +169,8 @@ Bundle 'wavded/vim-stylus'
 " markdown
 "Bundle 'suan/vim-instant-markdown'
 Bundle 'tpope/vim-markdown'
+
+call vundle#end()
 
 filetype plugin indent on
 
