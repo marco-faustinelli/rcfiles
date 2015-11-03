@@ -1,6 +1,7 @@
 ###################
 # aliases for Marco
 ###################
+alias ifif="ifdown eth0 && ifup eth0"
 alias e="exit"
 alias projs="cd ~/projects/Onebip"
 alias ou="cd ~/projects/Onebip/onebip-ultimate"
@@ -11,6 +12,8 @@ alias book="cd ~/projects/Onebip/bookclub"
 alias aliens="cd ~/projects/Onebip/bookclub/alienInvasion/faust-js"
 alias legacy="cd ~/projects/Onebip/onebip"
 alias le="cd ~/projects/Onebip/onebip"
+alias gmm="git merge master"
+alias grha="git reset --hard"
 alias ost="cd ~/projects/Onebip/operation-support-tools"
 alias lib="cd ~/projects/Onebip/onebip-libraries"
 alias dem="cd ~/projects/Onebip/demetra"
@@ -19,6 +22,7 @@ alias con="cd ~/projects/Onebip/connectivity"
 alias car="cd ~/projects/Onebip/caronte"
 alias plu="cd ~/projects/Onebip/plutone"
 alias pan="cd ~/projects/Onebip/panel"
+alias 1dk="cd ~/projects/Onebip/1dk-android"
 alias panel="cd ~/projects/Onebip/panel"
 alias pan2="cd ~/projects/Onebip/onebip-panel"
 alias panel2="cd ~/projects/Onebip/onebip-panel"
@@ -59,12 +63,13 @@ alias pfbk="phing force-bk"
 alias pui="phing ui-spec-unit"
 alias pcd="phing clean-dev"
 alias mu="ui-spec/node_modules/mocha/bin/mocha ui-spec/unit"
+alias mi="ui-spec/node_modules/mocha/bin/mocha ui-spec/integration"
 alias mud="ui-spec/node_modules/mocha/bin/mocha --debug-brk ui-spec/unit"
 alias me="ui-spec/node_modules/mocha/bin/mocha ui-spec/state_machine_exerciser"
 alias mau="ui-spec/node_modules/mocha/bin/mocha spec"
 alias ma="ui-spec/node_modules/mocha/bin/mocha ui-spec/acceptance -t 30000"
 alias ms="ui-spec/node_modules/mocha/bin/mocha ui-spec/stack -t 5000"
-alias sel='java -jar vendor/selenium-server-standalone-2.39.0/selenium-server-standalone-2.39.0.jar&'
+alias sel='/bin/java -client -Xmx500m -Xss1024k -jar /opt/selenium/selenium-server-standalone-2.39.0.jar -log /opt/selenium/selenium.log'
 alias uip='php /var/www/onebip/connectivity/scripts/userIsPoor.php '
 alias exp='php /var/www/onebip-ultimate/scripts/SetExpenditure.php '
 alias setexp='php /var/www/onebip-ultimate/scripts/SetExpenditure.php '

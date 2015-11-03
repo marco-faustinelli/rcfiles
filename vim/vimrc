@@ -187,3 +187,151 @@ map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr>
 
+" autoload the local .vimrc file you need to have
+" https://github.com/MarcWeber/vim-addon-local-vimrc
+" plugin installed
+
+let g:syntastic_php_checkers = ['php']
+let g:syntastic_mode_map = {'mode': 'active'}
+
+aug settings
+  au BufRead,BufNewFile build.xml setlocal expandtab tabstop=4 shiftwidth=4
+  au BufRead,BufNewFile *.feature setlocal expandtab tabstop=4 shiftwidth=4
+aug end
+
+unlet g:ctrlp_custom_ignore
+let g:ctrlp_custom_ignore = '\.git$\|\.tmp$\|\.work$\|vendor$'
+
+nnoremap <silent> <Leader>t :setlocal nocursorline <BAR> call RunCurrentTest('') <BAR> setlocal cursorline<CR>
+nnoremap <silent> <Leader>T :setlocal nocursorline <BAR> call RunCurrentTest('--stop-on-failure') <BAR> setlocal cursorline<CR>
+nnoremap <silent> <Leader>l :setlocal nocursorline <BAR> call RunLastTest() <BAR> setlocal cursorline<CR>
+nnoremap <silent> <Leader>f :setlocal nocursorline <BAR> call RunCurrentFunction() <BAR> setlocal cursorline<CR>
+nnoremap <silent> <Leader>e :setlocal nocursorline <BAR> call RunCurrentLine() <BAR> setlocal cursorline<CR>
+nnoremap <silent> <Leader>o :call OpenCurrentTest()<CR>
+
+" with the following map in normal mode <Leader>a will replace array(...) with [...]
+nnoremap <silent> <Leader>a /\<array\>\s*(<CR>:nohl<CR>dwmp%r]`pr[
+
+" with the following map in normal mode <Leader>s will remove the use of $self
+" in place of $this in all the closures
+nnoremap <silent> <Leader>s :g/\$self = \$this/d<CR>:%s/use ($self) //eg<CR>:%s/use ($self, /use (/eg<CR>:%s/\$self/$this/eg<CR>
+
+
+" note that the following only works with tpope/vim-commentary plugin
+" cannot say something like if exists("g:loaded_commentary") because
+" this file is sourced before commentary plugin, need to find a solution
+" for this...
+nnoremap <silent> <Leader>c :g/\<var_dump\>/ :normal gcc<CR>
+
+function! RunCurrentLine()
+  exec '!php -r "var_dump(' . substitute(getline('.'), '^\s\+\|;$', '', 'g') . ');"'
+endfunction
+
+function! RunLastTest()
+  if exists("g:php_pushups_last_command")
+    exec g:php_pushups_last_command
+  else
+    echo 'sorry, nothing to run :-('
+  end
+endfunction
+
+function! RunCurrentFunction()
+  let l:current_file=expand('%:p')
+  if match(l:current_file, 'Test\.php$') != -1
+    let l:function_pattern='\C^\s*\%(public\s\+\|static\s\+\|abstract\s\+\|protected\s\+\|private\s\+\)*function\s\+\([^(]\+\)\s*(.*$'
+    let l:function_line=search(l:function_pattern, 'bcnW')
+    if l:function_line > 0
+      let l:matches=matchlist(getline(l:function_line), l:function_pattern)
+      let g:php_pushups_last_command='!vendor/bin/phpunit --filter="' . l:matches[1] . '$" ' . l:current_file
+      exec g:php_pushups_last_command
+    else
+      echo 'sorry, nothing to run :-('
+    endif
+  elseif match(l:current_file, '\.feature$') != 1
+    let l:scenario_pattern='\C^\s*Scenario\s*:\s*.*$'
+    let l:scenario_line=search(l:scenario_pattern, 'bcnW')
+    if l:scenario_line > 0
+      let g:php_pushups_last_command='!cleanup.sh; vendor/bin/behat ' . l:current_file . ':' . l:scenario_line
+      exec g:php_pushups_last_command
+    else
+      echo 'sorry, nothing to run :-('
+    endif
+  endif
+endfunction
+
+function! RunCurrentTest(parameters)
+  let l:current_file=expand('%:p')
+  let l:test_file='nothing'
+  if match(l:current_file, '\.php$') != -1
+    if match(l:current_file, 'Test\.php$') != -1
+      let l:test_file=l:current_file
+    else
+      let l:test_file=SearchForRelatedTestFile(l:current_file)
+    endif
+    if l:test_file != 'nothing'
+      let g:php_pushups_last_command='!vendor/bin/phpunit ' . a:parameters. ' ' . l:test_file
+      exec g:php_pushups_last_command
+    else
+      echo 'sorry, nothing to run :-('
+    endif
+  elseif match(l:current_file, '\.feature$') != 1
+    let g:php_pushups_last_command='!cleanup.sh; ./scripts/behat-parallel.sh -q ' . l:current_file
+    exec g:php_pushups_last_command
+  endif
+endfunction
+
+function! OpenCurrentTest()
+  let l:current_file=expand("%:p")
+  let l:test_file="nothing"
+  let l:test_file=SearchForRelatedTestFile(l:current_file)
+  if l:test_file != "nothing"
+    exec ":belowright :split " l:test_file
+  else
+    echo "sorry, nothing to open :-("
+  endif
+endfunction
+
+
+function! SearchForRelatedTestFile(file_path)
+  let l:file_name=fnamemodify(a:file_path, ":t")
+  let l:test_file_name=fnamemodify(l:file_name, ":r") . "Test.php"
+  let l:project_root_path=ProjectRootGuess(a:file_path)
+  let l:found=system("find '".l:project_root_path."/spec' -name '".l:test_file_name."'")
+  let l:number_of_file_founds=strlen(substitute(l:found, "[^\n]", "", "g"))
+  if l:number_of_file_founds == 1
+    return l:found
+  endif
+endfunction
+
+
+function! ProjectRootGuess(file_path)
+  for l:marker in [".git", ".vimrc"]
+    let l:result=""
+    let l:pivot=a:file_path
+    while l:pivot!=fnamemodify(l:pivot, ":h")
+      let l:pivot=fnamemodify(l:pivot, ":h")
+      if len(glob(l:pivot."/".l:marker))
+        let l:result=l:pivot
+      endif
+    endwhile
+    if len(l:result)
+      return l:result
+    endif
+  endfor
+  return filereadable(a:file_path) ? fnamemodify(a:file_path, ":h") : a:file_path
+endfunction
+
+map <F6>  :call ComposerKnowWhereCurrentFileIs()<CR>
+function! ComposerKnowWhereCurrentFileIs()
+    let l:currentWord = expand('<cword>')
+    let l:command = "grep " . l:currentWord . " ../onebip/vendor/composer -R | awk '{print $6}' | awk -F\\' '{print $2}'"
+    let l:commandFileFound = l:command . ' | wc -l'
+    let l:numberOfResults = system(l:commandFileFound)
+    if l:numberOfResults == 1
+        let l:fileName = system(l:command)
+        let l:openFileCommand = 'tabe /root/projects/Onebip/onebip' . l:fileName
+        exec l:openFileCommand
+    else
+        exec "normal \<c-p>" . expand('<cword>')
+    endif
+endfunction
