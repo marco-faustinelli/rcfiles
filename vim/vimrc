@@ -177,6 +177,7 @@ filetype plugin indent on
 " color schemes
 " colorscheme digerati
 colorscheme molokai
+hi CursorLine cterm=NONE,underline
 
 " plugins
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.work$\|.keep$'
